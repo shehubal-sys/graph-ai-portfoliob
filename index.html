@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shehu Bala Abba | AI Portfolio</title>
+    <style>
+        /* --- RESET & BASICS --- */
+        :root {
+            --primary: #2563eb;
+            --secondary: #0f172a;
+            --accent: #3b82f6;
+            --bg-light: #f8fafc;
+            --text-main: #334155;
+            --text-light: #64748b;
+            --white: #ffffff;
+            --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            --gradient-card: linear-gradient(145deg, #ffffff, #f1f5f9);
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-main);
+            background-color: var(--bg-light);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; transition: color 0.3s ease; }
+        ul { list-style: none; }
+
+        /* --- LAYOUT UTILITIES --- */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 5rem 0;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--secondary);
+            letter-spacing: -0.5px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: var(--text-main);
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* --- HERO SECTION --- */
+        .hero {
+            background: var(--gradient-hero);
+            color: var(--white);
+            min-height: 80vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Abstract blobs for background visual interest */
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+        }
+        .blob-1 { width: 300px; height: 300px; background: #60a5fa; top: -50px; right: -50px; }
+        .blob-2 { width: 400px; height: 400px; background: #4f46e5; bottom: -100px; left: -100px; }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+            max-width: 600px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.75rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--white);
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* --- ABOUT ME --- */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        .profile-card {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+            text-align: center;
+        }
+
+        .avatar-img {
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 1.5rem;
+            display: block;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border: 4px solid var(--white);
+        }
+
+        .profile-card h3 {
+            margin-bottom: 0.5rem;
+            color: var(--secondary);
+        }
+
+        .profile-card .title {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: 1.5rem;
+            display: block;
+        }
+
+        .bio-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--secondary);
+        }
+
+        .bio-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-size: 1.05rem;
+        }
+
+        .skills-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: #eff6ff;
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        /* --- COURSE SECTION --- */
+        .course-section {
+            background: var(--white);
+        }
+
+        .section-header {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+        }
+
+        .section-header p {
+            color: var(--text-light);
+        }
+
+        .course-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-card {
+            padding: 2rem;
+            border-radius: 16px;
+            background: var(--bg-light);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            background: #fff;
+            box-shadow: var(--shadow-md);
+        }
+
+        .info-card h4 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* --- WEEKLY SUBMISSIONS --- */
+        .submissions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+        }
+
+        .submission-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+            position: relative;
+            top: 0;
+            border: 1px solid rgba(0,0,0,0.03);
+        }
+
+        .submission-card:hover {
+            box-shadow: var(--shadow-lg);
+            top: -5px;
+        }
+
+        .card-header {
+            height: 140px;
+            background: var(--gradient-hero);
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-header::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAiIGhlaWdodD0iMjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGNpcmNsZSBjeD0iMSIgY3k9IjEiIHI9IjEiIGZpbGw9InJnYmEoMjU1LDI1NSwyNTUsMC4xKSIvPjwvc3ZnPg==');
+            opacity: 0.3;
+        }
+
+        .module-number {
+            background: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            backdrop-filter: blur(5px);
+            z-index: 2;
+        }
+
+        .card-body {
+            padding: 2rem;
+        }
+
+        .card-body h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+            color: var(--secondary);
+            line-height: 1.4;
+        }
+
+        .card-body p {
+            font-size: 0.95rem;
+            color: var(--text-light);
+            margin-bottom: 1.5rem;
+        }
+
+        .card-link {
+            display: inline-flex;
+            align-items: center;
+            font-weight: 600;
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .card-link span { margin-left: 5px; transition: margin 0.2s; }
+        .card-link:hover span { margin-left: 10px; }
+
+        /* --- FOOTER --- */
+        footer {
+            background: var(--secondary);
+            color: var(--white);
+            padding: 4rem 0;
+            text-align: center;
+        }
+
+        .footer-content h2 { margin-bottom: 0.5rem; }
+        .footer-content p { opacity: 0.6; margin-bottom: 2rem; }
+        .copyright { font-size: 0.85rem; opacity: 0.4; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 2rem; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .nav-links { display: none; } /* Simple hiding for mobile, ideally would be a hamburger menu */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">Shehu Bala Abba</div>
+            <div class="nav-links">
+                <a href="#about">About Me</a>
+                <a href="#course">The Course</a>
+                <a href="#submissions">Submissions</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="container hero-content">
+            <h1>Bridging Epidemiology & <br>Artificial Intelligence</h1>
+            <p>Welcome to my learning portfolio for the "Generative AI for Work & Research" course. Exploring how no-code AI tools can transform public health operations.</p>
+            <a href="#submissions" class="btn btn-primary">View My Work</a>
+        </div>
+    </section>
+
+    <!-- ABOUT ME SECTION -->
+    <section id="about" class="section">
+        <div class="container">
+            <div class="about-grid">
+                <!-- Sidebar Profile Card -->
+                <div class="profile-card">
+                    <img src="https://github.com/kendavidn/my_graph_portfolio_2/blob/main/linkedin%20photo%20-%20Kene%20David%20Nwosu%20(1).png?raw=true" alt="Shehu Bala Abba" class="avatar-img">
+                    <h3>Shehu Bala Abba</h3>
+                    <span class="title">MBBS, MPH, MWACP</span>
+                    <hr style="border: 0; border-top: 1px solid #eee; margin: 1rem 0;">
+                    <p style="font-size: 0.9rem; color: #64748b;">Epidemiologist & Emergency Operations Leader</p>
+                </div>
+
+                <!-- Bio Content -->
+                <div class="bio-text">
+                    <h2>About Me</h2>
+                    <p>
+                        I am an Epidemiologist and Emergency Operations Leader with over 15 years of progressive experience managing state and national-scale public health operations. My work spans Advocacy, Communication, and Social Mobilization (ACSM), immunization campaign delivery, and outbreak response within complex emergency settings.
+                    </p>
+                    <p>
+                        Currently serving as a Field Coordinator & NEOC Focal Person for AFENET-NSTOP in Nigeria, I lead operations planning and analyze data to improve program quality and equity. I am passionate about leveraging technology to reach underserved and high-risk populations.
+                    </p>
+                    
+                    <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--secondary);">Core Competencies</h4>
+                    <div class="skills-container">
+                        <span class="skill-tag">Public Health Operations</span>
+                        <span class="skill-tag">Emergency Management</span>
+                        <span class="skill-tag">Data Analytics</span>
+                        <span class="skill-tag">Immunization Campaigns</span>
+                        <span class="skill-tag">Generative AI</span>
+                        <span class="skill-tag">Strategic Planning</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COURSE SECTION -->
+    <section id="course" class="section course-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>About the Course</h2>
+                <p>Generative AI for Work & Research by The GRAPH Courses</p>
+            </div>
+
+            <div class="course-details">
+                <div class="info-card">
+                    <h4>🎯 Objective</h4>
+                    <p>An 8-week live cohort course focused on mastering no-code AI tools for task automation, data analysis, and research productivity.</p>
+                </div>
+                <div class="info-card">
+                    <h4>🛠 Tools Learned</h4>
+                    <p>ChatGPT Canvas, Julius AI, Elicit, Windsurf, Botpress, and various automation agents for streamlining research workflows.</p>
+                </div>
+                <div class="info-card">
+                    <h4>🚀 Application</h4>
+                    <p>Applying AI to automate literature reviews, analyze public health datasets, and create custom chatbots for research assistance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SUBMISSIONS SECTION -->
+    <section id="submissions" class="section" style="background-color: #f1f5f9;">
+        <div class="container">
+            <div class="section-header">
+                <h2>Weekly Submissions</h2>
+                <p>A catalog of my projects and assignments completed during the course.</p>
+            </div>
+
+            <div class="submissions-grid">
+                
+                <!-- Week 1 -->
+                <article class="submission-card">
+                    <div class="card-header">
+                        <span class="module-number">Module 1</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Websites, Docs & Presentations</h3>
+                        <p>Understanding LLMs and using AI tools to generate structured research documents, LaTeX/Markdown outputs, and simple websites.</p>
+                        <a href="#" class="card-link">View Submission <span>&rarr;</span></a>
+                    </div>
+                </article>
+
+                <!-- Week 2 -->
+                <article class="submission-card">
+                    <div class="card-header">
+                        <span class="module-number">Module 2</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>AI-Automated Data Analysis</h3>
+                        <p>Using tools like Julius and ChatGPT Code Interpreter to process datasets, visualize results, and generate automated reports.</p>
+                        <a href="#" class="card-link">View Submission <span>&rarr;</span></a>
+                    </div>
+                </article>
+
+                <!-- Week 3 -->
+                <article class="submission-card">
+                    <div class="card-header">
+                        <span class="module-number">Module 3</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Text Analysis & Knowledge Synthesis</h3>
+                        <p>Leveraging AI for efficient literature reviews, text classification, and sentiment analysis to identify trends in large text collections.</p>
+                        <a href="#" class="card-link">View Submission <span>&rarr;</span></a>
+                    </div>
+                </article>
+
+                <!-- Week 4 -->
+                <article class="submission-card">
+                    <div class="card-header">
+                        <span class="module-number">Module 4</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Custom GPTs and Chatbots</h3>
+                        <p>Building specialized RAG systems and interactive chatbots with Botpress to act as intelligent research assistants.</p>
+                        <a href="#" class="card-link">View Submission <span>&rarr;</span></a>
+                    </div>
+                </article>
+
+                <!-- Week 5 -->
+                <article class="submission-card">
+                    <div class="card-header">
+                        <span class="module-number">Module 5</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>AI for Task Automation</h3>
+                        <p>Designing AI agents for complex flows, including email response automation and browser control for web-based tasks.</p>
+                        <a href="#" class="card-link">View Submission <span>&rarr;</span></a>
+                    </div>
+                </article>
+
+                <!-- Week 6 -->
+                <article class="submission-card">
+                    <div class="card-header">
+                        <span class="module-number">Module 6</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>GenAI for Communication</h3>
+                        <p>Creating research summaries, scientific figures, and video abstracts to effectively disseminate research findings.</p>
+                        <a href="#" class="card-link">View Submission <span>&rarr;</span></a>
+                    </div>
+                </article>
+
+                 <!-- Week 7 -->
+                 <article class="submission-card">
+                    <div class="card-header">
+                        <span class="module-number">Capstone</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Final Capstone Project</h3>
+                        <p>The culmination of the program: A comprehensive AI solution designed to solve a real-world challenge in public health operations.</p>
+                        <a href="#" class="card-link">View Project <span>&rarr;</span></a>
+                    </div>
+                </article>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container footer-content">
+            <h2>Shehu Bala Abba</h2>
+            <p>Generative AI Portfolio</p>
+            <div class="copyright">
+                &copy; 2024 Shehu Bala Abba. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Optional: Smooth scroll for internal links (older browsers support)
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                const targetId = this.getAttribute('href');
+                
+                // If it's just a placeholder link "#", do nothing
+                if (targetId === '#') {
+                    e.preventDefault();
+                    return;
+                }
+
+                e.preventDefault();
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
